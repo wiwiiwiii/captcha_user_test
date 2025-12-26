@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}ReCaptcha User Study{% endblock %}
+
+{% block api_script %}
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+{% endblock %}
+
+{% block heading %}ReCaptcha User Study{% endblock %}
+
+{% block widget_box %}
+<div id="g-recaptcha-box"></div>
+{% endblock %}
+
+{% block logic_script %}
+<script src="{{ url_for('static', filename='recaptcha.js') }}"></script>
+{% endblock %}

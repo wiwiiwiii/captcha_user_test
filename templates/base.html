@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}User Study{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    {% block api_script %}{% endblock %}
+</head>
+<body>
+
+    <div class="container">
+        {% include 'navbar.html' %}
+
+        <h2>{% block heading %}User Study{% endblock %}</h2>
+
+        <div class="progress">Round: <span id="current-count">0</span> / <span id="total-target">20</span></div>
+
+        <div id="setup-area">
+            <input type="text" id="user-id" placeholder="User ID (e.g. zzh)">
+            <button id="btn-start" class="btn btn-start">Start Experiment</button>
+        </div>
+
+        <div id="experiment-area" class="hidden">
+            <div class="timer" id="timer-display">0.00 s</div>
+
+            <div id="captcha-wrapper">
+                {% block widget_box %}{% endblock %}
+            </div>
+
+            <div class="status" id="msg">Initializing...</div>
+            <button id="btn-skip" class="btn btn-skip">Skip / Error</button>
+        </div>
+
+        <div id="done-msg" class="hidden">
+            <h3 style="color: green;">🎉 All Done!</h3>
+            <p>感谢您的配合，测试已完成。</p>
+        </div>
+    </div>
+
+    <div id="modal-overlay" class="hidden">
+        <div class="modal-box">
+            <h3 class="modal-title">刚才的情况是？</h3>
+            <p class="modal-desc">
+                <b>注意：</b>"消消乐"（点掉一直出新图）只要最后没报错，都算一次过。
+            </p>
+            <button class="choice-btn" style="background: #28a745;" onclick="confirmAttempts(1)">
+                ⚡️ 1 次 (一次过/消消乐)
+            </button>
+            <button class="choice-btn" style="background: #ffc107; color: black;" onclick="confirmAttempts(2)">
+                🤔 2 次 (报错重试了1轮)
+            </button>
+            <button class="choice-btn" style="background: #dc3545;" onclick="confirmAttempts(3)">
+                😩 3 次或更多 (好难)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const GLOBAL_SITE_KEY = "{{ site_key }}";
+    </script>
+
+    {% block logic_script %}{% endblock %}
+</body>
+</html>

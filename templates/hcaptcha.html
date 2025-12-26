@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}hCaptcha User Study{% endblock %}
+
+{% block api_script %}
+<script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
+{% endblock %}
+
+{% block heading %}hCaptcha User Study{% endblock %}
+
+{% block widget_box %}
+<div id="h-captcha-box"></div>
+{% endblock %}
+
+{% block logic_script %}
+<script src="{{ url_for('static', filename='hcaptcha.js') }}"></script>
+{% endblock %}

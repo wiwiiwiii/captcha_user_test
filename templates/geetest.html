@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block api_script %}
+<script src="https://static.geetest.com/v4/gt4.js"></script>
+{% endblock %}
+
+{% block heading %}{{ page_title }}{% endblock %}
+
+{% block widget_box %}
+<div id="geetest-box"></div>
+{% endblock %}
+
+{% block logic_script %}
+<script>
+    const GEETEST_ID = "{{ gt_id }}";
+    const TEST_TYPE = "{{ test_type }}"; // 'geetest_gobang' or 'geetest_icon'
+</script>
+<script src="{{ url_for('static', filename='geetest.js') }}"></script>
+{% endblock %}

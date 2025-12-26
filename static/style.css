@@ -1,0 +1,244 @@
+/* static/style.css - 完整版 */
+
+/* =========================================
+   1. 全局基础 (Global Base)
+   ========================================= */
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* 默认高度设置，配合 flex 居中 */
+    min-height: 100vh;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f2f5; /* 统一使用稍微高级一点的灰白背景 */
+    color: #333;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =========================================
+   2. 菜单页专用布局 (Menu Layout)
+   用于 body.menu-mode
+   ========================================= */
+body.menu-mode {
+    justify-content: center; /* 垂直居中 */
+    height: 100dvh;          /* 锁定视口高度，防止移动端地址栏导致滚动 */
+    overflow: hidden;        /* 强制无滚动条 */
+    padding: 0;              /* 移除默认 padding */
+}
+
+/* 菜单标题 */
+h1.menu-title {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #333;
+}
+
+/* 卡片容器 */
+.menu-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 340px;
+    padding: 0 20px;
+}
+
+/* --- 💎 宝石卡片核心样式 --- */
+.gem-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    text-decoration: none;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: 1px;
+
+    /* 玻璃质感 */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.1),
+        inset 0 0 15px rgba(255,255,255,0.2);
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gem-card h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+/* 动效 */
+.gem-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2), inset 0 0 20px rgba(255,255,255,0.4);
+}
+.gem-card:active {
+    transform: scale(0.96);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* 光泽装饰 */
+.gem-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+    transform: rotate(45deg);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* 颜色主题 */
+.style-google {
+    background: linear-gradient(135deg, rgba(66, 133, 244, 0.85), rgba(52, 168, 83, 0.8));
+    background-size: 200% 200%;
+}
+.style-google:hover {
+    box-shadow: 0 15px 30px rgba(66, 133, 244, 0.3), inset 0 0 20px rgba(255,255,255,0.4);
+}
+
+.style-hcaptcha {
+    background: linear-gradient(135deg, rgba(243, 160, 0, 0.85), rgba(234, 67, 53, 0.8));
+}
+.style-hcaptcha:hover {
+    box-shadow: 0 15px 30px rgba(234, 67, 53, 0.3), inset 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* =========================================
+   3. 测试页专用布局 (Study Page Layout)
+   用于普通 body (无 class 或 class="study-mode")
+   ========================================= */
+body:not(.menu-mode) {
+    padding-top: 20px;
+    background-color: #f4f4f9; /* 稍微深一点的背景区分 */
+}
+
+/* 主容器 */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+h2 { margin: 5px 0 15px; font-size: 1.5rem; }
+.progress { color: #888; margin-bottom: 15px; font-size: 0.9em; }
+
+/* 导航栏 (返回按钮) */
+.nav-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.link-back {
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex; align-items: center;
+    transition: color 0.2s;
+}
+.link-back:hover { color: #007bff; }
+.link-back::before { content: "←"; margin-right: 6px; font-size: 1.2em; line-height: 1; }
+
+/* 按钮通用 */
+.btn {
+    padding: 12px; font-size: 16px; cursor: pointer; border: none; border-radius: 8px;
+    margin: 10px 0; width: 100%; transition: transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.98); }
+.btn-start { background-color: #007bff; color: white; }
+.btn-start:hover { background-color: #0069d9; }
+.btn-skip { background-color: #6c757d; color: white; display: none; }
+.btn-skip:hover { background-color: #5a6268; }
+
+/* 输入框 */
+input[type="text"] {
+    padding: 12px; width: 100%; border: 1px solid #ccc; border-radius: 8px;
+    font-size: 16px; margin-bottom: 15px; outline: none;
+}
+input[type="text"]:focus { border-color: #007bff; }
+
+/* 验证码容器 */
+#captcha-wrapper {
+    margin-top: 10px; min-height: 78px;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.status { margin-top: 15px; color: #666; font-size: 14px; min-height: 20px; }
+.timer { font-weight: bold; color: #333; font-size: 1.4em; margin: 15px 0; }
+.hidden { display: none !important; }
+
+/* =========================================
+   4. 弹窗样式 (Modal) - 通用
+   ========================================= */
+#modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-box {
+    background: white; width: 85%; max-width: 320px;
+    padding: 25px 20px; border-radius: 16px;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+.modal-title { margin: 0 0 10px; color: #333; }
+.modal-desc { color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
+
+.choice-btn {
+    display: block; width: 100%; padding: 14px; margin-bottom: 10px;
+    border: none; border-radius: 10px; font-size: 16px; font-weight: bold;
+    color: white; text-align: left; padding-left: 20px; cursor: pointer;
+}
+
+/* Geetest Gobang: 紫水晶 (Purple/Deep Blue) */
+.style-gobang {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+.style-gobang:hover {
+    box-shadow: 0 15px 30px rgba(106, 17, 203, 0.3), inset 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* Geetest Icon: 绿松石/翡翠 (Teal/Green) */
+.style-icon {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+.style-icon:hover {
+    box-shadow: 0 15px 30px rgba(17, 153, 142, 0.3), inset 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* 移动端微调 */
+@media (max-width: 350px) {
+    .container { padding: 15px 10px; width: 96%; }
+    h2 { font-size: 1.3rem; }
+}
